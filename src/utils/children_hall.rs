@@ -5,12 +5,12 @@ pub mod base_hall {
     // использование среза
     pub struct ChildrenHall<'a> {
         name: String,
-        cbooks: &'a mut Vec<&'a ChildrenBook>
+        cbooks: &'a mut Vec<&'a mut ChildrenBook>
     }
 
     impl <'a>ChildrenHall<'a> {
         //конструктор с задаваемыми полями (Название, массив книг)
-        pub fn new(name: String, cbooks: &'a mut Vec<&'a ChildrenBook>) -> Self {
+        pub fn new(name: String, cbooks: &'a mut Vec<&'a mut ChildrenBook>) -> Self {
             Self { name, cbooks }
         }
 
@@ -27,22 +27,21 @@ pub mod base_hall {
         }
 
         //передача (ссылка на себя, ссылка на новую книгу)
-        pub fn rename_book (&mut self, index: usize, book: &'a ChildrenBook) {
+        pub fn rename_book (&mut self, index: usize, book: &ChildrenBook) {
 
-            self.cbooks[index] = book;
+            //self.cbooks[index] = book;
             //нужно реализовать отдельный метод глубого клонирования объекта, если 
             //хочу менять не только ссылки в векторе, но и поля оригинального экземпляра
             //..
-        }
-
-        fn clone_book(out: ChildrenBook, to: ChildrenBook) {
-            //...
+            clone_book(book, self.cbooks[index]);
         }
 
         
 
+        
+
         //добавление книги в конец вектора
-        pub fn add_new_book (&mut self, book: &'a ChildrenBook) {
+        pub fn add_new_book(&mut self, book: &'a mut ChildrenBook) {
             self.cbooks.push(book);
         }
 
@@ -53,6 +52,14 @@ pub mod base_hall {
         //...
 
 
+    }
+
+    pub fn clone_book(out: &ChildrenBook, to: &mut ChildrenBook) {
+        to.set_min_age(out.get_min_age());
+        to.book.set_title(out.book.get_title());
+        to.book.set_author(out.book.get_author());
+        to.book.set_price(out.book.get_price());
+        to.book.set_age(out.book.get_age());
     }
 
     

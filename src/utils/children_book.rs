@@ -38,8 +38,8 @@ pub mod base_children_book {
         }
 
         //сеттеры 
-        pub fn set_min_age(&self, age: i8) {
-            //...
+        pub fn set_min_age(&mut self, age: i8) {
+            self.min_age = age
         }
     }
     

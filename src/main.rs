@@ -15,7 +15,7 @@ fn main() {
 
 
     //использование структуры Book для создания базового экземпляра ChildrenBook
-    let book_2_0 = utils::base_cbook::new(book_1_0.clone(), 10);
+    let mut book_2_0 = utils::base_cbook::new(book_1_0.clone(), 10);
 
     //использование структуры ChildrenBook без зад-ых полей
     let mut book_2_1 = utils::empty_cbook::new();
@@ -43,17 +43,19 @@ fn main() {
     let mut book_2_3 = book_2_1.clone();
     let mut book_2_4 = book_2_1.clone();
 
+    let mut update_book = book_2_0.clone();
+
     //изменяемый вектор
-    let mut vector= vec![&book_2_0, &mut book_2_1, &mut book_2_2, &mut book_2_3, &mut book_2_4];
+    let mut vector= vec![&mut book_2_0, &mut book_2_1, &mut book_2_2, &mut book_2_3, &mut book_2_4];
 
     let mut chall_1_0 = utils::base_chall::new("Children_Hall".to_string(), &mut vector);
     println!("(Use vector) Print Hall: {} ", &chall_1_0.print());
 
     //замена книги в зале с индексом 1
-    chall_1_0.rename_book(1, &book_2_0);
+    chall_1_0.rename_book(1, &mut update_book);
 
     //добавление книги в конец списка
-    chall_1_0.add_new_book(&book_2_0);
+    chall_1_0.add_new_book(&mut update_book);
 
     //вывод изменённого зала
     println!("(Use vector) Print refreshed Hall: {} ", &chall_1_0.print());
