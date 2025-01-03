@@ -32,15 +32,22 @@ pub mod base_cs_book {
                 ChangeType::MinAge(min_age) => self.input = ChangeType::MinAge(min_age),
             }
         }
+
+        pub fn get_input(&self) -> ChangeType {
+            match self.input {
+                ChangeType::Index(index) => ChangeType::Index(index),
+                ChangeType::MinAge(min_age) => ChangeType::MinAge(min_age)
+            }
+        }
         
-        pub fn rewriting_book(&mut self, rewritable_book: CSBook) {
+        pub fn rewriting_book(&mut self, rewritable_book: &CSBook) {
             //book
             self.book.set_title(rewritable_book.book.get_title());
             self.book.set_author(rewritable_book.book.get_author());
             self.book.set_price(rewritable_book.book.get_price());
             self.book.set_age(rewritable_book.book.get_pub_age());
             //cs_book
-            self.set_input(rewritable_book.input);
+            self.set_input(rewritable_book.get_input());
             //self.book_type = rewritable_book.book_type; //невозможно т.к. &str неизменяемый тип
         }
     }
