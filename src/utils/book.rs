@@ -1,14 +1,11 @@
 pub mod base_book {
-    use crate::utils::t_book::TraitBook;
-
-
     //структура книги
     #[derive(Clone)] //указатель на создание трейта. Делает структуру клонируемой
     pub struct Book {
-        pub title: String,
-        pub author: String,
-        pub price: f32,
-        pub age: i16
+        title: String,
+        author: String,
+        price: f32,
+        pub_age: i16
     }
 
     //модуль пустой книги
@@ -22,7 +19,7 @@ pub mod base_book {
                 title: "None".to_string(), 
                 author: "None".to_string(), 
                 price: 0., 
-                age: 0
+                pub_age: 0
             }
         }
     }
@@ -30,9 +27,13 @@ pub mod base_book {
     //реализация типа Book
     impl Book {
         //конструктор с задаваемымми значениями
-        pub fn new(title: String, author: String, price: f32, age: i16) -> Self {
-            Self {title, author, price, age}
+        pub fn new(title: String, author: String, price: f32, pub_age: i16) -> Self {
+            Self {title, author, price, pub_age}
         }
+        pub fn print(&self) -> String {
+            format!("{} {} {} {}", self.get_title(), self.get_author(), self.get_price(), self.get_pub_age())
+        }
+
         //геттеры
         pub fn get_title(&self) -> String {
             self.title.to_string()
@@ -43,8 +44,8 @@ pub mod base_book {
         pub fn get_price(&self) -> f32 {
             self.price
         }
-        pub fn get_age(&self) -> i16 {
-            self.age
+        pub fn get_pub_age(&self) -> i16 {
+            self.pub_age
         }
 
         //сеттеры
@@ -58,20 +59,7 @@ pub mod base_book {
             self.price = new_price
         }
         pub fn set_age(&mut self, new_age: i16) {
-            self.age = new_age
-        }
-        
-    }
-
-    //реализация trait
-    impl TraitBook for Book {
-        fn print(&self) -> String {
-            format!("{} {} {} {}", self.title, self.author, self.price, self.age) //форматирует в String, но не выводит в консоль
-        }
+            self.pub_age = new_age
+        }   
     }
 }
-
-
-
-
-
