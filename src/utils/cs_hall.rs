@@ -1,8 +1,6 @@
 pub mod base_cs_hall {
-    use std::vec;
 
     pub use crate::base_cs_book;
-    use crate::utils::empty::new;
 
     use self::base_cs_book::CSBook;
     pub struct CSHall <'a> {
@@ -34,22 +32,31 @@ pub mod base_cs_hall {
             self.books.push(book);
         }
 
-        pub fn add_book_by_index(mut self, index: usize, book: &'a mut CSBook<'a>) -> CSHall<'a> {
+        pub fn add_book_by_index(&mut self, index: usize, book: &'a mut CSBook<'a>) {
             
-            let mut vector: Vec<&'a mut CSBook<'a>> = vec![];
+            self.books.insert(index, book);
+        }
 
-            for num in 0..self.books.len()-1 {  
+        pub fn best_book(&self) -> CSBook<'a> {
+            
+            let mut price: f32 = 0.0;
+            let mut iter_index: usize = 0;
+            let mut best_index: usize = 0;
 
-                if num == index {
-                    vector.push(book);
+            for book in self.books.iter() {
+                if book.get_price() >= price {
+                    price = book.get_price();
+                    best_index = iter_index;
                 }
-                else {
-                    vector.push(self.books[num]);
-                }
+                iter_index+=1;
             }
-            self.books = vector;
-            CSHall { hall_name: self.hall_name, books: &mut vector }
-            //нужно подумать, лучше стоит передать право владения над залом и вернуть новый зал
+            let best_book= self.books[best_index].clone();
+            best_book
+        }
+
+        pub fn transfer_book(out: &'a mut CSHall<'a>, index: usize, to: &mut CSHall<'a>) {
+            to.books.push(out.books[index]);
+            //out.books.pop(out.books[index]);
         }
 
     }

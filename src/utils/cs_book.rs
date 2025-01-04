@@ -39,6 +39,10 @@ pub mod base_cs_book {
                 ChangeType::MinAge(min_age) => ChangeType::MinAge(min_age)
             }
         }
+
+        pub fn get_price(&self) -> f32 {
+            self.book.get_price()
+        }
         
         pub fn rewriting_book(&mut self, rewritable_book: &CSBook) {
             //book

@@ -1,6 +1,5 @@
 pub mod utils;
 use utils::base_csbook;
-use utils::cs_book;
 use utils::empty_csbook;
 use utils::base_cshall;
 
@@ -26,6 +25,7 @@ fn main() {
     let mut csbook_1_1 = empty_csbook::new("Children");
     let mut csbook_1_2 = empty_csbook::new("Scientific");
     let mut new_csbook = empty_csbook::new("Children");
+    let mut add_csbook = empty_csbook::new("Scientific");
 
     println!("csbook_1_0: {}", csbook_1_0.print());
     println!("csbook_1_1: {}", csbook_1_1.print());
@@ -38,7 +38,14 @@ fn main() {
     let mut vector = vec![&mut csbook_1_0, &mut csbook_1_1, &mut csbook_1_2];
     let mut cs_hall = base_cshall::new(String::from("hall"), &mut vector);
     cs_hall.add_book(&mut new_csbook);
+    cs_hall.add_book_by_index(3, &mut add_csbook);
     println!("\ncs_hall: {}", cs_hall.print());
+    println!("\nBest book: {}", cs_hall.best_book().print())
 
+    //children_library
+    //..
+
+    //scientific_lybrary
+    //..
 
 }
