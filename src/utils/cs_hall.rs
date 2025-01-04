@@ -37,26 +37,25 @@ pub mod base_cs_hall {
             self.books.insert(index, book);
         }
 
-        pub fn best_book(&self) -> CSBook<'a> {
-            
-            let mut price: f32 = 0.0;
-            let mut iter_index: usize = 0;
-            let mut best_index: usize = 0;
+        pub fn best_book(&self) -> &CSBook<'a> {
+            let mut best_book: &CSBook<'a> = &self.books[0];
+            let mut price: f32 = best_book.get_price();
 
             for book in self.books.iter() {
                 if book.get_price() >= price {
                     price = book.get_price();
-                    best_index = iter_index;
+                    best_book = book;
                 }
-                iter_index+=1;
             }
-            let best_book= self.books[best_index].clone();
+            
             best_book
         }
 
-        pub fn transfer_book(out: &'a mut CSHall<'a>, index: usize, to: &mut CSHall<'a>) {
-            to.books.push(out.books[index]);
-            //out.books.pop(out.books[index]);
+        pub fn transfer_book(out: &mut CSHall<'a>, index: usize, to: &mut CSHall<'a>) {
+            if index < out.books.len() {
+                let book = out.books.remove(index); //remove удаляет и возвращает объект
+                to.add_book(book);
+            }
         }
 
     }
