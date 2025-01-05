@@ -16,8 +16,8 @@ pub mod base_book {
         //дефолтный конструктор 
         pub fn new() -> Book {
             Book {
-                title: "None".to_string(), 
-                author: "None".to_string(), 
+                title: String::from("None"), 
+                author: String::from("None"), 
                 price: 0., 
                 pub_age: 0
             }

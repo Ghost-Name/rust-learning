@@ -10,8 +10,8 @@ pub use utils::t_library::TLibrary;
 
 fn main() {    
    //book
-    let book_1_0 = utils::base::new("Title".to_string(), 
-        "Author".to_string(),
+    let book_1_0 = utils::base::new(String::from("Title"), 
+        String::from("Author"),
         99.90,
         2004);
     /* 
