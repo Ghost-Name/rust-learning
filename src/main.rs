@@ -2,8 +2,10 @@ pub mod utils;
 use utils::base_csbook;
 use utils::empty_csbook;
 use utils::base_cshall;
+use utils::ch_library;
 
 pub use utils::cs_book::base_cs_book;
+pub use utils::t_library::TLibrary;
 
 
 fn main() {    
@@ -58,7 +60,9 @@ fn main() {
     println!("\nRefreshed cs_hall_1: {} \n\nRefreshed cs_hall_2: {}", cs_hall_1.print(), cs_hall_2.print());
 
     //children_library
-    //..
+    let mut ch_vector = vec![&mut cs_hall_1, &mut cs_hall_2];
+    let children_library = ch_library::new(String::from("Children library"), &mut ch_vector);
+    println!("\nchildren_library: {}", children_library.print());
 
     //scientific_lybrary
     //..
