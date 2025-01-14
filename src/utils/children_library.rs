@@ -1,6 +1,8 @@
 pub mod base_library {
+    use crate::utils::cs_hall;
     pub use crate::utils::cs_hall::base_cs_hall::CSHall;
     pub use crate::utils::t_library::TLibrary;
+    pub use crate::utils::cs_book::base_cs_book::CSBook;
 
     pub struct ChildrenLibrary <'a> {
         library_name: String,
@@ -15,6 +17,18 @@ pub mod base_library {
         //добавить вывод лучшей книги в библиотеке
         //вывод общего числа книг в залах
         //..
+        pub fn print_best_book(&self) -> &CSBook<'a> {
+            let mut best_book : &CSBook<'a> = self.halls[0].best_book();
+            let mut intermediate : &CSBook<'a>;
+
+            for hall in self.halls.iter() {
+                intermediate = hall.best_book();
+                if best_book.get_price() < intermediate.get_price() {
+                    best_book = intermediate;
+                }
+            }
+            best_book
+        }
     }
     impl <'a> TLibrary <'a> for ChildrenLibrary <'a>{
         fn print(&self) -> String {
