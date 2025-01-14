@@ -24,6 +24,9 @@ pub mod base_cs_hall {
             result
         }
 
+        pub fn get_len(&self) -> usize {
+            self.books.len()
+        }
         pub fn set_hall_name(&mut self, new_name: String) {
             self.hall_name = new_name;
         }

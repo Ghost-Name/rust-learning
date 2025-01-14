@@ -1,5 +1,4 @@
 pub mod base_library {
-    use crate::utils::cs_hall;
     pub use crate::utils::cs_hall::base_cs_hall::CSHall;
     pub use crate::utils::t_library::TLibrary;
     pub use crate::utils::cs_book::base_cs_book::CSBook;
@@ -16,20 +15,13 @@ pub mod base_library {
 
         //добавить вывод лучшей книги в библиотеке
         //вывод общего числа книг в залах
+        //поиграться с хешированием
+        //поиграться с equals
         //..
-        pub fn print_best_book(&self) -> &CSBook<'a> {
-            let mut best_book : &CSBook<'a> = self.halls[0].best_book();
-            let mut intermediate : &CSBook<'a>;
 
-            for hall in self.halls.iter() {
-                intermediate = hall.best_book();
-                if best_book.get_price() < intermediate.get_price() {
-                    best_book = intermediate;
-                }
-            }
-            best_book
-        }
+        
     }
+
     impl <'a> TLibrary <'a> for ChildrenLibrary <'a>{
         fn print(&self) -> String {
             let mut result = String::new();
@@ -42,6 +34,27 @@ pub mod base_library {
             }
 
             result
+        }
+
+        fn print_best_book(&self) -> &CSBook<'a> {
+            let mut best_book : &CSBook<'a> = self.halls[0].best_book();
+            let mut intermediate : &CSBook<'a>;
+
+            for hall in self.halls.iter() {
+                intermediate = hall.best_book();
+                if best_book.get_price() < intermediate.get_price() {
+                    best_book = intermediate;
+                }
+            }
+            best_book
+        }
+
+        fn get_len_library(&self) -> usize {
+            let mut len : usize = 0;
+            for hall in self.halls.iter() {
+                len += hall.get_len()
+            }
+            len
         }
     }
 }

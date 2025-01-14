@@ -63,7 +63,8 @@ fn main() {
     let mut ch_vector = vec![&mut cs_hall_1, &mut cs_hall_2];
     let children_library = ch_library::new(String::from("Children library"), &mut ch_vector);
     println!("\nchildren_library: {}", children_library.print());
-    println!("best book in children_library: {}",&children_library.print_best_book().print())
+    println!("best book in children_library: {}",&children_library.print_best_book().print());
+    println!("number of books of children_library: {}", children_library.get_len_library())
 
     //scientific_lybrary
     //..
