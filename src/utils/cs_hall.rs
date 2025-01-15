@@ -27,6 +27,13 @@ pub mod base_cs_hall {
         pub fn get_len(&self) -> usize {
             self.books.len()
         }
+        pub fn get_hall_name(&self) -> String {
+            self.hall_name.to_string()
+        }
+        pub fn get_books(&'a mut self) -> &'a mut Vec<&'a mut CSBook<'a>> {
+            self.books
+        }
+        
         pub fn set_hall_name(&mut self, new_name: String) {
             self.hall_name = new_name;
         }

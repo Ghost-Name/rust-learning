@@ -43,6 +43,8 @@ pub mod base_cs_book {
         pub fn get_price(&self) -> f32 {
             self.book.get_price()
         }
+
+        
         
         pub fn rewriting_book(&mut self, rewritable_book: &CSBook) {
             //book

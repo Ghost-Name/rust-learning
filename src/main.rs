@@ -1,4 +1,6 @@
 pub mod utils;
+use std::hash::{Hash, DefaultHasher};
+
 use utils::base_csbook;
 use utils::empty_csbook;
 use utils::base_cshall;
@@ -64,7 +66,10 @@ fn main() {
     let children_library = ch_library::new(String::from("Children library"), &mut ch_vector);
     println!("\nchildren_library: {}", children_library.print());
     println!("best book in children_library: {}",&children_library.print_best_book().print());
-    println!("number of books of children_library: {}", children_library.get_len_library())
+    println!("number of books of children_library: {}", children_library.get_len_library());
+
+    let mut hasher = DefaultHasher::new();
+    //println!("Hash: {}", children_library.hash(&mut hasher));
 
     //scientific_lybrary
     //..

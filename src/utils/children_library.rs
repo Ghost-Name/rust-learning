@@ -2,6 +2,9 @@ pub mod base_library {
     pub use crate::utils::cs_hall::base_cs_hall::CSHall;
     pub use crate::utils::t_library::TLibrary;
     pub use crate::utils::cs_book::base_cs_book::CSBook;
+    pub use crate::utils::cs_book::base_cs_book::ChangeType;
+
+    use std::hash::{Hash, Hasher, DefaultHasher};
 
     pub struct ChildrenLibrary <'a> {
         library_name: String,
@@ -56,5 +59,42 @@ pub mod base_library {
             }
             len
         }
+
+        fn calculate_hash<T: Hash>(t: &T) -> u64 {
+            let mut s = DefaultHasher::new();
+            t.hash(&mut s);
+            s.finish()
+        }
     }
+
+    //БИБА
+    impl <'a> Hash for ChildrenLibrary <'a> {
+        fn hash<H: Hasher>(&self, state: &mut H) {
+            self.library_name.hash(state);
+            for hall in self.halls.iter() {
+                hall.get_hall_name().hash(state);
+                /* 
+                for cs_book in hall.get_books().iter() {
+                    cs_book.get_input().hash(state);
+
+                    //дописать хеширование полей для книг
+                }
+                */
+                
+            }
+
+        }
+    }
+    
+
+    //БИБА поменьше
+    impl Hash for ChangeType {
+        fn hash<H: Hasher>(&self, state: &mut H) {
+            match self {
+                ChangeType::Index(index) => index.to_bits().hash(state),
+                ChangeType::MinAge(min_age) => min_age.hash(state)
+            }
+        }
+    }
+    
 }
