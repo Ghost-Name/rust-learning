@@ -1,4 +1,5 @@
 pub mod utils;
+use std::hash::Hasher;
 use std::hash::{Hash, DefaultHasher};
 
 use utils::base_csbook;
@@ -69,7 +70,8 @@ fn main() {
     println!("number of books of children_library: {}", children_library.get_len_library());
 
     let mut hasher = DefaultHasher::new();
-    //println!("Hash: {}", children_library.hash(&mut hasher));
+    children_library.hash(&mut hasher);
+    println!("Hash: {}", hasher.finish());
 
     //scientific_lybrary
     //..
